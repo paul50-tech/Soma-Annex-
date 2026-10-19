@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
 import { calculateSeedlingPrice, calculateGrandTotal } from './pricing.ts';
+import { SOMA_PHOTOS } from '../data/somaImages.ts';
 
 test('retail price applies when below wholesale minimum threshold', () => {
   const result = calculateSeedlingPrice(50, 4.0, 2.5, 100);
@@ -48,3 +51,17 @@ test('grand total includes delivery fee properly', () => {
   assert.equal(calculateGrandTotal(1200, 0), 1200);
   assert.equal(calculateGrandTotal(undefined, 200), undefined);
 });
+
+test('all SOMA_PHOTOS are self-hosted in public/images/soma and exist on disk', () => {
+  const entries = Object.entries(SOMA_PHOTOS);
+  assert.ok(entries.length >= 50, 'Should have at least 50 curated photos');
+  for (const [key, relUrl] of entries) {
+    assert.ok(relUrl.startsWith('/images/soma/'), `Photo ${key} must use local /images/soma/ path, got ${relUrl}`);
+    const diskPath = path.join(process.cwd(), 'public', relUrl);
+    assert.ok(fs.existsSync(diskPath), `Local image file missing for ${key}: ${diskPath}`);
+    const stat = fs.statSync(diskPath);
+    assert.ok(stat.size > 1000, `Local image file too small for ${key}: ${stat.size} bytes`);
+  }
+});
+
+
