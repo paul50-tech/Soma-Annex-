@@ -1,0 +1,6 @@
+{
+  "name": "Soma Annex Planters",
+  "description": "Premier horticultural nursery, organic produce supplier, and agricultural training hub in Gachororo, Juja, Kenya. Quality seedlings, floriculture, and agronomic advisory.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
