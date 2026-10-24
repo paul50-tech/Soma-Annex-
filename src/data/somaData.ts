@@ -21,15 +21,16 @@ export const COMPANY_INFO = {
     sundaySw: 'Tumefungwa (Jumapili)',
   },
   mpesa: {
-    type: 'M-Pesa (Issued via WhatsApp)',
-    typeSw: 'Lipa na M-Pesa (Hutolewa kupitia WhatsApp)',
-    tillStatus: 'Official payment details (M-Pesa) will be provided on WhatsApp after placing your order and confirming stock.',
-    tillStatusSw: 'Maelezo ya malipo (M-Pesa) hutolewa moja kwa moja kwenye WhatsApp baada ya kuweka agizo na kuthibitisha miche.',
+    type: 'Lipa na M-Pesa Buy Goods Till',
+    typeSw: 'Lipa na M-Pesa (Buy Goods)',
+    tillNumber: '3289066',
+    tillStatus: 'Lipa na M-Pesa Buy Goods Till: 3289066 (Soma Annex Planters). Pay upon nursery batch confirmation.',
+    tillStatusSw: 'Lipa na M-Pesa Buy Goods Till: 3289066 (Soma Annex Planters). Lipa baada ya kuthibitisha oda.',
     businessName: 'Soma Annex Planters',
   },
   socials: {
-    instagram: 'https://www.instagram.com/p/DOtqRZBDLT7/?igsh=MW56ajY4MHJkdzhmcA==',
-    tiktok: 'https://vm.tiktok.com/ZSgSX56Ku/',
+    instagram: 'https://www.instagram.com/somaannex',
+    tiktok: 'https://www.tiktok.com/@somaannex',
     whatsapp: 'https://wa.me/254115864901',
   },
 };

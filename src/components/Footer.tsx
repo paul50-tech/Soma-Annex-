@@ -201,7 +201,7 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
                 title="Follow on Instagram"
               >
                 <InstagramIcon className="w-3.5 h-3.5 text-pink-400" />
-                <span className="hidden sm:inline">Instagram</span>
+                <span className="hidden sm:inline">@somaannex</span>
               </a>
               <span aria-hidden="true">·</span>
               <a
@@ -209,17 +209,17 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-neutral-400 hover:text-cyan-300 transition-colors flex items-center gap-1"
-                aria-label="TikTok"
-                title="Follow on TikTok"
+                aria-label="TikTok @somaannex"
+                title="Follow @somaannex on TikTok"
               >
                 <TikTokIcon className="w-3.5 h-3.5 text-cyan-400" />
-                <span className="hidden sm:inline">TikTok</span>
+                <span className="hidden sm:inline">@somaannex</span>
               </a>
             </div>
             <span aria-hidden="true">·</span>
             <span>Operating under Kenyan Horticultural Best Practices</span>
             <span aria-hidden="true">·</span>
-            <span>M-Pesa Buy Goods & Services</span>
+            <span className="font-medium text-emerald-400">Buy Goods Till: 3289066</span>
           </div>
         </div>
 

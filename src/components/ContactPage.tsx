@@ -249,12 +249,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-neutral-100 flex items-center justify-between">
+              <div className="pt-3 border-t border-neutral-100 flex items-center justify-between flex-wrap gap-2">
                 <span className="text-[11px] font-semibold text-emerald-800 uppercase tracking-wide">
-                  Order Payment
+                  Lipa na M-Pesa
                 </span>
-                <span className="text-xs font-medium text-neutral-700">
-                  {lang === 'en' ? 'Details sent on WhatsApp after order' : 'Maelezo hutumwa WhatsApp baada ya oda'}
+                <span className="text-xs font-bold font-mono text-emerald-900 bg-emerald-50 px-2.5 py-1 rounded border border-emerald-200">
+                  Buy Goods Till: 3289066
                 </span>
               </div>
             </div>

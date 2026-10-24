@@ -65,7 +65,8 @@ export const TrayCalculator: React.FC<TrayCalculatorProps> = ({
       `*Customer Name:* ${customerName.trim() || 'Nursery Customer'}\n` +
       `*Customer Contact:* ${customerPhone.trim() || 'Via WhatsApp'}\n` +
       (customerNotes.trim() ? `*Special Request:* ${customerNotes.trim()}\n\n` : '\n') +
-      `_Please confirm nursery batch readiness, quote, and send payment details._`;
+      `*Payment:* Lipa na M-Pesa Buy Goods Till 3289066 (SOMA ANNEX PLANTERS)\n` +
+      `_Please confirm nursery batch readiness, quote, and dispatch date._`;
 
     const encoded = encodeURIComponent(message);
     window.open(`https://wa.me/${COMPANY_INFO.primaryPhoneDigits}?text=${encoded}`, '_blank');
@@ -302,7 +303,7 @@ export const TrayCalculator: React.FC<TrayCalculatorProps> = ({
                   {lang === 'en' ? 'Order Status:' : 'Hali ya Agizo:'}
                 </span>
                 <span className="block text-[11px] text-emerald-800 font-medium">
-                  {lang === 'en' ? 'Payment details sent on WhatsApp after order & batch verification' : 'Maelezo ya malipo hutumwa WhatsApp baada ya kukagua miche'}
+                  {lang === 'en' ? 'Lipa na M-Pesa Buy Goods Till: 3289066 (Soma Annex Planters)' : 'Lipa na M-Pesa Buy Goods Till: 3289066 (Soma Annex Planters)'}
                 </span>
               </div>
               <span className="text-base font-bold font-mono text-emerald-800">

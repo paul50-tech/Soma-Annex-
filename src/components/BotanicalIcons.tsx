@@ -67,10 +67,10 @@ export const WhatsAppIcon = ({ className = "w-5 h-5 text-emerald-500 fill-curren
   </svg>
 );
 
-export const MPesaBadge = () => (
+export const MPesaBadge = ({ till = "3289066" }: { till?: string }) => (
   <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-700 text-white rounded text-xs font-semibold tracking-wide">
     <span className="font-mono text-emerald-200">M-PESA</span>
-    <span>Buy Goods Till</span>
+    <span>Buy Goods Till {till}</span>
   </div>
 );
 

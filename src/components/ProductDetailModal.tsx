@@ -149,10 +149,15 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               </span>
             </div>
           )}
-          <div className="mt-2 text-[11px] text-emerald-800 font-medium">
-            {lang === 'en'
-              ? 'Payment Notice: Payment details are sent via WhatsApp after order confirmation.'
-              : 'Zingatio la Malipo: Maelezo ya malipo hutumwa kupitia WhatsApp baada ya kuthibitisha oda.'}
+          <div className="mt-2 text-[11px] text-emerald-800 font-medium flex items-center justify-between flex-wrap gap-1">
+            <span>
+              {lang === 'en'
+                ? 'Lipa na M-Pesa Buy Goods Till: 3289066 (SOMA ANNEX PLANTERS)'
+                : 'Lipa na M-Pesa Buy Goods Till: 3289066 (SOMA ANNEX PLANTERS)'}
+            </span>
+            <span className="font-mono text-emerald-900 font-bold bg-emerald-100/90 px-2 py-0.5 rounded text-[10px]">
+              TILL: 3289066
+            </span>
           </div>
         </div>
 

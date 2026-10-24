@@ -205,14 +205,24 @@ export const VisitContactSection: React.FC<VisitContactProps> = ({ lang }) => {
             </div>
 
             {/* M-Pesa Official Verification Notice */}
-            <div className="bg-emerald-900 text-white rounded-2xl p-5 flex items-center justify-between">
-              <div>
-                <MPesaBadge />
-                <p className="text-xs text-emerald-200 mt-2">
-                  Official M-Pesa confirmation is dispatched from <strong>SOMA ANNEX PLANTERS</strong> upon nursery tray readiness.
-                </p>
+            <div className="bg-emerald-900 text-white rounded-2xl p-5 border border-emerald-800">
+              <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-emerald-800/80">
+                <div className="flex items-center gap-2">
+                  <MPesaBadge till="3289066" />
+                  <span className="text-xs text-emerald-300 font-medium hidden sm:inline">Soma Annex Planters</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-emerald-300">Till No:</span>
+                  <span className="font-mono text-lg font-bold text-white tracking-widest bg-emerald-950/70 px-3 py-0.5 rounded border border-emerald-700/60 shadow-xs">
+                    3289066
+                  </span>
+                </div>
               </div>
-              <span className="text-xl font-bold font-mono text-emerald-300">Juja, KE</span>
+              <p className="text-xs text-emerald-200 mt-2.5 leading-relaxed">
+                {lang === 'en'
+                  ? 'Official Lipa na M-Pesa Buy Goods Till: 3289066 (SOMA ANNEX PLANTERS). Confirmation is dispatched upon nursery tray readiness.'
+                  : 'Nambari rasmi ya Lipa na M-Pesa Buy Goods Till: 3289066 (SOMA ANNEX PLANTERS). Thibitisho hutolewa baada ya miche kuwa tayari.'}
+              </p>
             </div>
 
           </div>

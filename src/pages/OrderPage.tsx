@@ -81,8 +81,8 @@ export const OrderPage: React.FC<OrderPageProps> = ({ lang }) => {
               </strong>
               <p>
                 {lang === 'en'
-                  ? 'You will receive payment details via WhatsApp after placing your order and batch readiness is confirmed.'
-                  : 'Maelezo ya malipo utatumiwa kwa WhatsApp baada ya kuweka oda na kuthibitisha tarehe ya kuchukua.'}
+                  ? 'Official Lipa na M-Pesa Buy Goods Till: 3289066 (SOMA ANNEX PLANTERS). Confirmation is dispatched upon batch readiness.'
+                  : 'Lipa na M-Pesa Buy Goods Till: 3289066 (SOMA ANNEX PLANTERS). Thibitisho hutolewa baada ya miche kuwa tayari.'}
               </p>
             </div>
           </div>
