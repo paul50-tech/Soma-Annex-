@@ -9,15 +9,29 @@ import { WhatsAppIcon, SproutEmblem, Tray128GridIcon, SachetAromaIcon, RootPlugI
 interface CatalogSectionProps {
   lang: Language;
   onSelectProductForCalculator: (productId: string) => void;
+  searchQuery?: string;
+  onSearchChange?: (query: string) => void;
+  activeCategory?: ProductCategory;
+  onCategoryChange?: (category: ProductCategory) => void;
 }
 
 export const CatalogSection: React.FC<CatalogSectionProps> = ({
   lang,
   onSelectProductForCalculator,
+  searchQuery: externalSearchQuery,
+  onSearchChange: externalOnSearchChange,
+  activeCategory: externalActiveCategory,
+  onCategoryChange: externalOnCategoryChange,
 }) => {
-  const [activeCategory, setActiveCategory] = useState<ProductCategory>('all');
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [internalActiveCategory, setInternalActiveCategory] = useState<ProductCategory>('all');
+  const [internalSearchQuery, setInternalSearchQuery] = useState<string>('');
   const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null);
+
+  const activeCategory = externalActiveCategory !== undefined ? externalActiveCategory : internalActiveCategory;
+  const setActiveCategory = externalOnCategoryChange || setInternalActiveCategory;
+
+  const searchQuery = externalSearchQuery !== undefined ? externalSearchQuery : internalSearchQuery;
+  const setSearchQuery = externalOnSearchChange || setInternalSearchQuery;
 
   const categories: { id: ProductCategory; labelEn: string; labelSw: string; count: number }[] = [
     { id: 'all', labelEn: 'All Nursery Catalog', labelSw: 'Bidhaa Zote', count: PRODUCTS.length },
@@ -27,17 +41,53 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
     { id: 'inputs-value-add', labelEn: 'Inputs, Feed & Wellness', labelSw: 'Substrate & Thamani', count: PRODUCTS.filter(p => p.category === 'inputs-value-add').length },
   ];
 
+  const categoryKeywords: Record<ProductCategory, string[]> = {
+    all: [],
+    'leafy-greens': [
+      'leafy', 'greens', 'brassica', 'brassicas', 'vegetable', 'vegetables',
+      'mboga', 'miche ya mboga', 'greens and brassicas', 'kales', 'sukuma', 'cabbage', 'spinach', 'lettuce'
+    ],
+    'herbs-succulents': [
+      'herb', 'herbs', 'medicinal', 'succulent', 'succulents', 'viungo',
+      'mimea ya dawa', 'dawa', 'aromatic', 'tea', 'spices', 'medicinal herbs'
+    ],
+    'floriculture': [
+      'floriculture', 'flower', 'flowers', 'cut flower', 'cut flowers',
+      'maua', 'mapambo', 'ornamental', 'landscaping', 'floral', 'roses', 'rose'
+    ],
+    'inputs-value-add': [
+      'input', 'inputs', 'substrate', 'feed', 'wellness', 'poultry',
+      'chicken', 'chickens', 'kuku', 'thamani', 'value add', 'value addition',
+      'cocopeat', 'sachet', 'sachets', 'pullets', 'compost', 'produce'
+    ],
+  };
+
   const filteredProducts = PRODUCTS.filter((item) => {
     const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
     const query = searchQuery.toLowerCase().trim();
-    const matchesSearch =
-      query === '' ||
+
+    if (!query) {
+      return matchesCategory;
+    }
+
+    // Check if query matches category metadata
+    const catObj = categories.find(c => c.id === item.category);
+    const categoryMatches =
+      item.category.toLowerCase().includes(query) ||
+      (catObj && (catObj.labelEn.toLowerCase().includes(query) || catObj.labelSw.toLowerCase().includes(query))) ||
+      (categoryKeywords[item.category] && categoryKeywords[item.category].some(kw => query.includes(kw) || kw.includes(query)));
+
+    const textMatches =
       item.nameEn.toLowerCase().includes(query) ||
       item.nameSw.toLowerCase().includes(query) ||
       item.variety.toLowerCase().includes(query) ||
-      item.primaryUseEn.toLowerCase().includes(query);
+      item.primaryUseEn.toLowerCase().includes(query) ||
+      item.primaryUseSw.toLowerCase().includes(query) ||
+      item.descriptionEn.toLowerCase().includes(query) ||
+      item.descriptionSw.toLowerCase().includes(query) ||
+      item.highlights.some(h => h.toLowerCase().includes(query));
 
-    return matchesCategory && matchesSearch;
+    return matchesCategory && (textMatches || categoryMatches);
   });
 
   const handleQuickWhatsApp = (product: ProductItem) => {
@@ -120,61 +170,148 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
           </p>
         </div>
 
-        {/* Filter Controls (Allowed as interactive buttons per Frontend Constitution) */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-          
-          {/* Segmented Category Buttons */}
-          <div className="flex items-center gap-1.5 p-1 bg-neutral-100 rounded-xl overflow-x-auto max-w-full">
-            {categories.map((cat) => (
+        {/* Filter Controls */}
+        <div className="flex flex-col gap-3 mb-8">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            
+            {/* Segmented Category Buttons */}
+            <div className="flex items-center gap-1.5 p-1 bg-neutral-100 rounded-xl overflow-x-auto max-w-full">
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={`px-3.5 py-2 text-xs font-semibold rounded-lg transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
+                    activeCategory === cat.id
+                      ? 'bg-white text-emerald-950 shadow-xs border border-neutral-200/60'
+                      : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-200/50'
+                  }`}
+                >
+                  <span>{lang === 'en' ? cat.labelEn : cat.labelSw}</span>
+                  <span className="text-[10px] opacity-60 font-mono">({cat.count})</span>
+                </button>
+              ))}
+            </div>
+
+            {/* In-Catalog Search Bar */}
+            <div className="w-full md:w-80 relative">
+              <input
+                type="text"
+                placeholder={lang === 'en' ? 'Filter by name or category (e.g. cabbage, herbs)...' : 'Tafuta kwa jina au kategoria (mf. mboga, dawa)...'}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-9 pr-9 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-emerald-600 outline-none text-neutral-900 transition-all placeholder:text-neutral-400"
+              />
+              <svg className="w-4 h-4 text-neutral-400 absolute left-3 top-2.5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  title={lang === 'en' ? 'Clear search' : 'Futa utafutaji'}
+                  className="absolute right-2.5 top-2 p-0.5 text-neutral-400 hover:text-neutral-700 rounded-md hover:bg-neutral-200/60 transition-colors"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              )}
+            </div>
+
+          </div>
+
+          {/* Active Filter & Results Summary Bar */}
+          <div className="flex flex-wrap items-center justify-between text-xs text-neutral-600 pt-2 border-t border-neutral-100 gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="font-medium text-neutral-700">
+                {lang === 'en'
+                  ? `Showing ${filteredProducts.length} of ${PRODUCTS.length} varieties`
+                  : `Inaonyesha aina ${filteredProducts.length} kati ya ${PRODUCTS.length}`}
+              </span>
+              
+              {searchQuery && (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-50 text-emerald-900 border border-emerald-200 rounded-md text-[11px]">
+                  <span>"{searchQuery}"</span>
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="hover:text-emerald-700 ml-0.5"
+                    title={lang === 'en' ? 'Remove filter' : 'Ondoa kichujio'}
+                  >
+                    ×
+                  </button>
+                </span>
+              )}
+
+              {activeCategory !== 'all' && (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-neutral-100 text-neutral-800 border border-neutral-200 rounded-md text-[11px]">
+                  <span>{categories.find(c => c.id === activeCategory)?.[lang === 'en' ? 'labelEn' : 'labelSw']}</span>
+                  <button
+                    onClick={() => setActiveCategory('all')}
+                    className="hover:text-neutral-900 ml-0.5"
+                    title={lang === 'en' ? 'Reset category' : 'Weka upya kundi'}
+                  >
+                    ×
+                  </button>
+                </span>
+              )}
+            </div>
+
+            {(searchQuery || activeCategory !== 'all') && (
               <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`px-3.5 py-2 text-xs font-semibold rounded-lg transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
-                  activeCategory === cat.id
-                    ? 'bg-white text-emerald-950 shadow-xs border border-neutral-200/60'
-                    : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-200/50'
-                }`}
+                onClick={() => {
+                  setSearchQuery('');
+                  setActiveCategory('all');
+                }}
+                className="text-xs font-semibold text-emerald-700 hover:text-emerald-900 hover:underline transition-colors"
               >
-                <span>{lang === 'en' ? cat.labelEn : cat.labelSw}</span>
-                <span className="text-[10px] opacity-60 font-mono">({cat.count})</span>
+                {lang === 'en' ? 'Clear all filters' : 'Futa vichujio vyote'}
               </button>
-            ))}
+            )}
           </div>
-
-          {/* Quick Search */}
-          <div className="w-full md:w-72 relative">
-            <input
-              type="text"
-              placeholder={lang === 'en' ? 'Search cabbage, herbs, roses...' : 'Tafuta kabichi, dawa, maua...'}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-emerald-600 outline-none text-neutral-900"
-            />
-            <svg className="w-4 h-4 text-neutral-400 absolute left-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </div>
-
         </div>
 
         {/* Products Grid */}
         {filteredProducts.length === 0 ? (
-          <div className="text-center py-16 bg-neutral-50 rounded-xl border border-neutral-200">
-            <SproutEmblem className="w-10 h-10 text-neutral-400 mx-auto mb-3" />
-            <h3 className="text-base font-semibold text-neutral-800">
-              {lang === 'en' ? 'No items match your search' : 'Hakuna bidhaa inayolingana na utafutaji wako'}
+          <div className="text-center py-16 px-4 bg-neutral-50 rounded-xl border border-neutral-200">
+            <SproutEmblem className="w-12 h-12 text-neutral-400 mx-auto mb-3" />
+            <h3 className="text-base font-semibold text-neutral-900">
+              {lang === 'en' ? 'No seedlings or produce match your search' : 'Hakuna miche au mazao yanayolingana na utafutaji wako'}
             </h3>
-            <p className="text-xs text-neutral-500 mt-1">
-              {lang === 'en' ? 'Try searching for "cabbage", "spinach", "roses" or clear filters.' : 'Jaribu kutafuta "kabichi", "spinach", au "waridi".'}
+            <p className="text-xs text-neutral-500 max-w-md mx-auto mt-1 mb-4 leading-relaxed">
+              {searchQuery
+                ? lang === 'en'
+                  ? `No results found for "${searchQuery}" in ${activeCategory === 'all' ? 'any category' : categories.find(c => c.id === activeCategory)?.labelEn}. Try checking the spelling or browse suggestions below.`
+                  : `Hakuna matokeo ya "${searchQuery}". Jaribu kurekebisha jina au bonyeza mapendekezo hapa chini.`
+                : lang === 'en'
+                ? 'No items found in this category at this moment.'
+                : 'Hakuna bidhaa kwenye kategoria hii kwa sasa.'}
             </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
+              <span className="text-[11px] text-neutral-400">
+                {lang === 'en' ? 'Suggested searches:' : 'Matafuto yaliyopendekezwa:'}
+              </span>
+              {['Sukuma Wiki', 'Cabbage', 'Rosemary', 'Spinach', 'Roses', 'Cocopeat'].map((sug) => (
+                <button
+                  key={sug}
+                  onClick={() => {
+                    setActiveCategory('all');
+                    setSearchQuery(sug);
+                  }}
+                  className="px-2.5 py-1 text-xs font-medium text-emerald-800 bg-white border border-emerald-300 hover:bg-emerald-50 rounded-md transition-colors"
+                >
+                  {sug}
+                </button>
+              ))}
+            </div>
+
             <button
               onClick={() => {
                 setActiveCategory('all');
                 setSearchQuery('');
               }}
-              className="mt-4 px-3 py-1.5 text-xs font-semibold text-emerald-800 bg-emerald-100 rounded-md"
+              className="px-4 py-2 text-xs font-semibold text-white bg-emerald-700 hover:bg-emerald-800 rounded-lg shadow-xs transition-colors"
             >
-              Reset Filters
+              {lang === 'en' ? 'Reset All Filters & View Catalog' : 'Weka Upya na Tazama Bidhaa Zote'}
             </button>
           </div>
         ) : (

@@ -9,6 +9,7 @@ import { Language } from './types';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
+import { OfflineIndicator } from './components/OfflineIndicator';
 
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
@@ -58,6 +59,9 @@ function AppLayout({ lang, onToggleLang }: { lang: Language; onToggleLang: () =>
 
       {/* Persistent Global Footer */}
       <Footer lang={lang} />
+
+      {/* Global PWA Offline Banner & Sync Toast */}
+      <OfflineIndicator />
     </div>
   );
 }

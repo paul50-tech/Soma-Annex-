@@ -40,6 +40,9 @@ export const SOMA_PHOTOS = {
   managuNightshade: '/images/soma/IMG-20261019-WA0077.jpg', // WA0077: Managu / nightshade seedlings
   dhaniaCorianderBed: '/images/soma/IMG-20261019-WA0111.jpg', // WA0111: Coriander / dhania & carrot bed
   parsleyHerbs: '/images/soma/IMG-20261019-WA0067.jpg', // WA0067: Parsley / serrated culinary herbs
+  rosemaryPotted: '/assets/aistudio/pexels-deeanacreates-9192083_fad07f4f.jpg', // Tuscan Blue Rosemary aromatic needle foliage
+  aloeVeraSucker: '/assets/aistudio/pexels-bogdan-groshev-722715367-20347279_6c81d51b.jpg', // Potted Aloe barbadensis succulent with thick spiked healing leaves
+  snakePlantLaurentii: '/assets/aistudio/pexels-olha-ruskykh-6279940_7a2fdb7b.jpg', // Upright variegated Sansevieria snake plant with gold-banded sword foliage
   strawberryHerbBed: '/images/soma/IMG-20261019-WA0090.jpg', // WA0090: Perennial herbs & strawberry bed
   garlicAlliumLabeled: '/images/soma/IMG-20261019-WA0113.jpg', // WA0113: Labeled Garlic / Allium propagation
   courgetteSeedling: '/images/soma/IMG-20261019-WA0036.jpg', // WA0036: Courgette / cucurbit plugs
@@ -114,8 +117,8 @@ export const PRODUCT_PHOTO_MAP: Record<string, { primary: string; gallery: strin
     gallery: [SOMA_PHOTOS.pakChoiVigorous, SOMA_PHOTOS.spinachTrayRows],
   },
   'rosemary-potted': {
-    primary: SOMA_PHOTOS.strawberryHerbBed,
-    gallery: [SOMA_PHOTOS.strawberryHerbBed, SOMA_PHOTOS.nurseryTaggedVarieties],
+    primary: SOMA_PHOTOS.rosemaryPotted,
+    gallery: [SOMA_PHOTOS.rosemaryPotted, '/assets/aistudio/pexels-eva-bronzini-6262108_3af5be46.jpg', SOMA_PHOTOS.nurseryTaggedVarieties],
   },
   'mint-peppermint': {
     primary: SOMA_PHOTOS.mintPeppermint,
@@ -138,16 +141,16 @@ export const PRODUCT_PHOTO_MAP: Record<string, { primary: string; gallery: strin
     gallery: [SOMA_PHOTOS.garlicAlliumLabeled, SOMA_PHOTOS.nurseryTaggedVarieties],
   },
   'aloe-vera-sucker': {
-    primary: SOMA_PHOTOS.nurseryTaggedVarieties,
-    gallery: [SOMA_PHOTOS.nurseryTaggedVarieties, SOMA_PHOTOS.courgetteSeedling],
+    primary: SOMA_PHOTOS.aloeVeraSucker,
+    gallery: [SOMA_PHOTOS.aloeVeraSucker, SOMA_PHOTOS.nurseryTaggedVarieties],
   },
   'jade-plant': {
     primary: SOMA_PHOTOS.courgetteSeedling,
     gallery: [SOMA_PHOTOS.courgetteSeedling, SOMA_PHOTOS.nurseryTaggedVarieties],
   },
   'snake-plant': {
-    primary: SOMA_PHOTOS.pumpkinZucchini,
-    gallery: [SOMA_PHOTOS.pumpkinZucchini, SOMA_PHOTOS.nurseryTaggedVarieties],
+    primary: SOMA_PHOTOS.snakePlantLaurentii,
+    gallery: [SOMA_PHOTOS.snakePlantLaurentii, SOMA_PHOTOS.nurseryTaggedVarieties],
   },
   'fresh-chrysanthemums-sm': {
     primary: SOMA_PHOTOS.chrysanthemumSunburstYellow,
@@ -358,5 +361,26 @@ export const NURSERY_SHOWCASE_GALLERY: GalleryPhoto[] = [
     titleEn: 'Open-Field Equatorial Sun-Hardening Tables',
     titleSw: 'Meza za Kustahimisha Miche Jua Kabla ya Mauzo',
     category: 'nursery',
+  },
+  {
+    id: 'rosemary-potted-stock',
+    url: SOMA_PHOTOS.rosemaryPotted,
+    titleEn: 'Tuscan Blue Rosemary Seedling Nursery Stock',
+    titleSw: 'Miche Bora ya Rosemary Kwenye Kitalu',
+    category: 'seedlings',
+  },
+  {
+    id: 'aloe-vera-stock',
+    url: SOMA_PHOTOS.aloeVeraSucker,
+    titleEn: 'Medicinal Aloe Vera Potted Succulent Stock',
+    titleSw: 'Mche wa Aloe Vera wa Dawa Kitaluni',
+    category: 'seedlings',
+  },
+  {
+    id: 'snake-plant-stock',
+    url: SOMA_PHOTOS.snakePlantLaurentii,
+    titleEn: 'Sansevieria Laurentii Snake Plant Air-Purifier',
+    titleSw: 'Mti wa Sansevieria (Snake Plant) Kusafisha Hewa',
+    category: 'seedlings',
   },
 ];

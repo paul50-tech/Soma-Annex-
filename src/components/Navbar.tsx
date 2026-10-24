@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { Language } from '../types';
 import { SproutEmblem } from './BotanicalIcons';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface NavbarProps {
   lang: Language;
@@ -60,8 +61,10 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang }) => {
             ))}
           </nav>
 
-          {/* Zone 3: Language Toggle + Direct Order Tray CTA */}
+          {/* Zone 3: Language Toggle + PWA Install + Direct Order Tray CTA */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            <PWAInstallButton variant="navbar" />
+
             <button
               onClick={onToggleLang}
               aria-label="Switch language"
@@ -116,7 +119,8 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang }) => {
               {lang === 'en' ? item.labelEn : item.labelSw}
             </NavLink>
           ))}
-          <div className="pt-2 border-t border-neutral-100">
+          <div className="pt-3 border-t border-neutral-100 flex flex-col gap-2.5">
+            <PWAInstallButton variant="banner" />
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
@@ -132,3 +136,4 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onToggleLang }) => {
     </header>
   );
 };
+
