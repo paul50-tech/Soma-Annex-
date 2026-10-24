@@ -30,7 +30,7 @@ export const DetailedServicesSection: React.FC<DetailedServicesSectionProps> = (
         'Dense fibrous root plugs ensure near-zero transplant shock in open fields',
         'Sterile propagation media eliminates damping-off, fusarium wilt, and nematodes',
         'Shortens open-field maturity timeline by 2 to 3 weeks compared to direct seed sowing',
-        'Dual-tier pricing with automatic wholesale discounts unlocked at 100+ seedlings',
+        'Dual-tier pricing with automatic wholesale discounts unlocked at 1,000+ seedlings',
       ],
       ctaLabelEn: 'Calculate & Order Trays',
       ctaLabelSw: 'Piga Hesabu ya Trei & Agiza',

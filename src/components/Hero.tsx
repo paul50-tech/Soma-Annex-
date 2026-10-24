@@ -160,7 +160,7 @@ export const Hero: React.FC<HeroProps> = ({ lang, onOpenOrderModal }) => {
                 </div>
                 <div className="flex items-start gap-2">
                   <SproutEmblem className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>{lang === 'en' ? 'Wholesale from 100+ Seedlings' : 'Bei ya Jumla kuanzia 100+'}</span>
+                  <span>{lang === 'en' ? 'Wholesale from 1,000+ Seedlings' : 'Bei ya Jumla kuanzia 1,000+'}</span>
                 </div>
               </div>
             </div>

@@ -13,7 +13,7 @@ export function calculateSeedlingPrice(
   quantity: number,
   retailPrice?: number,
   wholesalePrice?: number,
-  minWholesaleQty: number = 100
+  minWholesaleQty: number = 1000
 ): PricingCalculationResult {
   const safeQty = Math.max(0, quantity);
   const fullTrays = Math.floor(safeQty / 128);

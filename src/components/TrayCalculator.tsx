@@ -34,7 +34,7 @@ export const TrayCalculator: React.FC<TrayCalculatorProps> = ({
   const selectedCrop = PRODUCTS.find((p) => p.id === selectedCropId) || seedlingCrops[0];
   const selectedDelivery = DELIVERY_ZONES.find((z) => z.id === deliveryZoneId) || DELIVERY_ZONES[0];
 
-  const minWholesale = selectedCrop.minWholesaleQty || 100;
+  const minWholesale = selectedCrop.minWholesaleQty || 1000;
   const pricing = calculateSeedlingPrice(
     quantity,
     selectedCrop.retailPriceKES,
@@ -54,7 +54,7 @@ export const TrayCalculator: React.FC<TrayCalculatorProps> = ({
 
     const pricingInfo = hasPrice && subtotal
       ? `*Pricing:* KES ${unitPrice} each (Total: KES ${total ? total.toLocaleString() : subtotal.toLocaleString()})\n`
-      : `*Pricing:* Quote requested for ${quantity >= minWholesale ? 'Wholesale (100+)' : 'Retail'} batch\n`;
+      : `*Pricing:* Quote requested for ${quantity >= minWholesale ? 'Wholesale (1,000+)' : 'Retail'} batch\n`;
 
     const message = 
       `🌱 *ORDER / TRAY INQUIRY - SOMA ANNEX FARM*\n\n` +
@@ -86,8 +86,8 @@ export const TrayCalculator: React.FC<TrayCalculatorProps> = ({
           </div>
           <p className="text-xs text-neutral-500 mt-1">
             {lang === 'en' 
-              ? 'Calculates 128-cell plug trays. Wholesale tier unlocked at 100+ seedlings per variety.' 
-              : 'Inapiga hesabu ya trei za chemba 128. Bei ya jumla inaanza kuanzia miche 100+.'}
+              ? 'Calculates 128-cell plug trays. Wholesale tier unlocked at 1,000+ seedlings per variety.' 
+              : 'Inapiga hesabu ya trei za chemba 128. Bei ya jumla inaanza kuanzia miche 1,000+.'}
           </p>
         </div>
 
@@ -189,6 +189,15 @@ export const TrayCalculator: React.FC<TrayCalculatorProps> = ({
               >
                 5 Trays (640)
               </button>
+              <button
+                type="button"
+                onClick={() => setQuantity(1024)}
+                className={`px-2.5 py-1.5 text-xs font-medium rounded-md border transition-all ${
+                  quantity === 1024 ? 'border-emerald-600 bg-emerald-50 text-emerald-900' : 'border-neutral-200 text-neutral-600 hover:bg-neutral-50'
+                }`}
+              >
+                8 Trays (1,024 - Wholesale)
+              </button>
             </div>
           </div>
 
@@ -198,8 +207,8 @@ export const TrayCalculator: React.FC<TrayCalculatorProps> = ({
               <span className="font-semibold text-emerald-700 flex items-center gap-1.5">
                 <SproutEmblem className="w-3.5 h-3.5 text-emerald-600" />
                 {lang === 'en' 
-                  ? `Wholesale Tier Unlocked (${quantity} seedlings >= 100). Bulk nursery rates apply.`
-                  : `Kiwango cha Jumla Kimewashwa (miche ${quantity} >= 100). Bei ya jumla inatumika.`}
+                  ? `Wholesale Tier Unlocked (${quantity} seedlings >= 1,000). Bulk nursery rates apply.`
+                  : `Kiwango cha Jumla Kimewashwa (miche ${quantity} >= 1,000). Bei ya jumla inatumika.`}
               </span>
             ) : (
               <span className="text-neutral-500">

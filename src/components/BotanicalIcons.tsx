@@ -82,3 +82,18 @@ export const FlowerBudIcon = ({ className = "w-8 h-8 text-rose-500" }: { classNa
     <path d="M8 18c2 0 4 3 4 3s2-3 4-3" />
   </svg>
 );
+
+export const InstagramIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+);
+
+export const TikTokIcon = ({ className = "w-5 h-5 fill-current" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.62c.4 0 .79.09 1.14.24V9.54a6.33 6.33 0 0 0-1.14-.1A6.33 6.33 0 0 0 3.16 15.75a6.33 6.33 0 0 0 6.33 6.31c3.5 0 6.33-2.83 6.33-6.31V9.28a8.23 8.23 0 0 0 4.77 1.5v-3.45a4.8 4.8 0 0 1-1-.64z" />
+  </svg>
+);
+

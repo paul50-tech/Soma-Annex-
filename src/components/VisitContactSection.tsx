@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
 import { COMPANY_INFO } from '../data/somaData';
-import { WhatsAppIcon, MPesaBadge } from './BotanicalIcons';
+import { WhatsAppIcon, MPesaBadge, InstagramIcon, TikTokIcon } from './BotanicalIcons';
 
 interface VisitContactProps {
   lang: Language;
@@ -169,6 +169,37 @@ export const VisitContactSection: React.FC<VisitContactProps> = ({ lang }) => {
                       <span className="text-[11px] text-neutral-500">Official Correspondence</span>
                     </div>
                   </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 pt-1">
+                  <a
+                    href={COMPANY_INFO.socials.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white rounded-xl border border-neutral-200 hover:border-pink-500 hover:bg-pink-50/20 transition-all flex items-center gap-2.5 text-xs text-neutral-800 font-semibold group"
+                  >
+                    <div className="p-1.5 bg-pink-50 text-pink-600 rounded-lg">
+                      <InstagramIcon className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="block font-bold text-neutral-900 group-hover:text-pink-600 transition-colors">Instagram</span>
+                      <span className="text-[10px] text-neutral-500 font-normal">Nursery Updates</span>
+                    </div>
+                  </a>
+                  <a
+                    href={COMPANY_INFO.socials.tiktok}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white rounded-xl border border-neutral-200 hover:border-neutral-800 hover:bg-neutral-50 transition-all flex items-center gap-2.5 text-xs text-neutral-800 font-semibold group"
+                  >
+                    <div className="p-1.5 bg-neutral-900 text-white rounded-lg">
+                      <TikTokIcon className="w-4 h-4 text-cyan-400" />
+                    </div>
+                    <div>
+                      <span className="block font-bold text-neutral-900 group-hover:text-neutral-950 transition-colors">TikTok</span>
+                      <span className="text-[10px] text-neutral-500 font-normal">Farming Videos</span>
+                    </div>
+                  </a>
                 </div>
               </div>
             </div>

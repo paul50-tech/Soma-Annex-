@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Language } from '../types';
 import { COMPANY_INFO } from '../data/somaData';
-import { SproutEmblem, WhatsAppIcon } from './BotanicalIcons';
+import { SproutEmblem, WhatsAppIcon, InstagramIcon, TikTokIcon } from './BotanicalIcons';
 
 interface FooterProps {
   lang: Language;
@@ -34,6 +34,45 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
             <div className="text-xs text-neutral-500 space-y-1 pt-2">
               <p>📍 {COMPANY_INFO.campus}</p>
               <p>⏰ Mon – Sat: 8:00 AM – 6:00 PM (Closed Sundays)</p>
+            </div>
+
+            {/* Social Media Links */}
+            <div className="pt-2">
+              <span className="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider block mb-2.5">
+                {lang === 'en' ? 'Connect With Our Nursery' : 'Tufuate Mitandaoni'}
+              </span>
+              <div className="flex flex-wrap items-center gap-2.5">
+                <a
+                  href={COMPANY_INFO.socials.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Soma Annex Farm on Instagram"
+                  className="inline-flex items-center gap-2 px-3 py-2 bg-neutral-900 hover:bg-neutral-800 text-neutral-300 hover:text-white rounded-lg border border-neutral-800 hover:border-pink-500/50 transition-all text-xs group"
+                >
+                  <InstagramIcon className="w-4 h-4 text-pink-500 group-hover:scale-110 transition-transform" />
+                  <span className="font-medium">Instagram</span>
+                </a>
+                <a
+                  href={COMPANY_INFO.socials.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Soma Annex Farm on TikTok"
+                  className="inline-flex items-center gap-2 px-3 py-2 bg-neutral-900 hover:bg-neutral-800 text-neutral-300 hover:text-white rounded-lg border border-neutral-800 hover:border-cyan-400/50 transition-all text-xs group"
+                >
+                  <TikTokIcon className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" />
+                  <span className="font-medium">TikTok</span>
+                </a>
+                <a
+                  href={COMPANY_INFO.socials.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Chat with Soma Annex Farm on WhatsApp"
+                  className="inline-flex items-center gap-2 px-3 py-2 bg-neutral-900 hover:bg-neutral-800 text-neutral-300 hover:text-white rounded-lg border border-neutral-800 hover:border-emerald-500/50 transition-all text-xs group"
+                >
+                  <WhatsAppIcon className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform fill-current" />
+                  <span className="font-medium">WhatsApp</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -109,16 +148,40 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
               </li>
             </ul>
 
-            <div className="pt-3">
+            <div className="pt-3 space-y-2">
+              <span className="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider block">
+                {lang === 'en' ? 'Direct Farm Orders' : 'Maagizo ya Shambani'}
+              </span>
               <a
                 href={`https://wa.me/${COMPANY_INFO.primaryPhoneDigits}?text=${encodeURIComponent('Hello Soma Annex Farm, I would like to order seedlings.')}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-3.5 py-2 bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg transition-colors"
+                className="inline-flex items-center gap-2 px-3.5 py-2 bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg transition-colors w-fit"
               >
-                <WhatsAppIcon className="w-4 h-4 text-emerald-200" />
+                <WhatsAppIcon className="w-4 h-4 text-emerald-200 fill-current" />
                 <span>+254 115 864 901</span>
               </a>
+
+              <div className="flex items-center gap-2 pt-1">
+                <a
+                  href={COMPANY_INFO.socials.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 hover:border-pink-500/50 rounded-lg text-xs text-neutral-300 hover:text-pink-400 transition-colors"
+                >
+                  <InstagramIcon className="w-3.5 h-3.5 text-pink-400" />
+                  <span>Instagram</span>
+                </a>
+                <a
+                  href={COMPANY_INFO.socials.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 hover:border-cyan-400/50 rounded-lg text-xs text-neutral-300 hover:text-cyan-300 transition-colors"
+                >
+                  <TikTokIcon className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>TikTok</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -127,7 +190,33 @@ export const Footer: React.FC<FooterProps> = ({ lang }) => {
         {/* Bottom Quiet Line */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 gap-4">
           <p>© {new Date().getFullYear()} Soma Annex Planters (operating as Soma Annex Farm). Gachororo, Juja, Kenya.</p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex items-center gap-3">
+              <a
+                href={COMPANY_INFO.socials.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-400 hover:text-pink-400 transition-colors flex items-center gap-1"
+                aria-label="Instagram"
+                title="Follow on Instagram"
+              >
+                <InstagramIcon className="w-3.5 h-3.5 text-pink-400" />
+                <span className="hidden sm:inline">Instagram</span>
+              </a>
+              <span aria-hidden="true">·</span>
+              <a
+                href={COMPANY_INFO.socials.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-400 hover:text-cyan-300 transition-colors flex items-center gap-1"
+                aria-label="TikTok"
+                title="Follow on TikTok"
+              >
+                <TikTokIcon className="w-3.5 h-3.5 text-cyan-400" />
+                <span className="hidden sm:inline">TikTok</span>
+              </a>
+            </div>
+            <span aria-hidden="true">·</span>
             <span>Operating under Kenyan Horticultural Best Practices</span>
             <span aria-hidden="true">·</span>
             <span>M-Pesa Buy Goods & Services</span>

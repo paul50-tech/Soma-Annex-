@@ -120,7 +120,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
               <div>
                 <span className="block text-xs text-neutral-500">
-                  {lang === 'en' ? 'Wholesale Price (100+ units)' : 'Bei ya Jumla (Miche 100+)'}
+                  {lang === 'en' ? 'Wholesale Price (1,000+ units)' : 'Bei ya Jumla (Miche 1,000+)'}
                 </span>
                 <span className="text-xl font-bold font-mono text-emerald-800">
                   {product.wholesalePriceKES ? (
@@ -145,7 +145,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 </span>
               </div>
               <span className="text-xs text-neutral-500">
-                {lang === 'en' ? 'Wholesale tier unlocked at 100+ seedlings' : 'Bei ya jumla huanzia miche 100+'}
+                {lang === 'en' ? 'Wholesale tier unlocked at 1,000+ seedlings' : 'Bei ya jumla huanzia miche 1,000+'}
               </span>
             </div>
           )}

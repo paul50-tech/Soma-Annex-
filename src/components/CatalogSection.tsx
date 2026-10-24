@@ -413,7 +413,7 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
                           {item.wholesalePriceKES && (
                             <div className="text-right">
                               <span className="block text-[11px] text-emerald-700 font-medium">
-                                {lang === 'en' ? 'Wholesale (100+)' : 'Jumla (100+)'}
+                                {lang === 'en' ? 'Wholesale (1,000+)' : 'Jumla (1,000+)'}
                               </span>
                               <span className="text-base font-bold font-mono text-emerald-800 tabular-nums">
                                 KES {item.wholesalePriceKES}
